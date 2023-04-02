@@ -1,0 +1,29 @@
+  <script>
+  (function(doc){
+  // Get the current script element
+  var scriptElm = doc.currentScript || doc.scripts[doc.scripts.length - 1];
+
+  // Print a warning message to the console
+  console.warn('[Ionicons] This script is deprecated, please remove it.');
+
+  // Get the base URL for the Ionicons library
+  var parts = scriptElm.src.split('/');
+  parts.pop();
+  var url = parts.join('/');
+
+  // Load the ES module version of Ionicons
+  var esmScriptElm = doc.createElement('script');
+  esmScriptElm.setAttribute('type', 'module');
+  esmScriptElm.src = url + '/ionicons.esm.js';
+  esmScriptElm.setAttribute('data-stencil-namespace', 'ionicons');
+  doc.head.appendChild(esmScriptElm);
+
+  // Load the fallback script for browsers that don't support ES modules
+  var nomoduleScriptElm = doc.createElement('script');
+  nomoduleScriptElm.setAttribute('nomodule', '');
+  nomoduleScriptElm.src = url + '/ionicons.js';
+  nomoduleScriptElm.setAttribute('data-stencil-namespace', 'ionicons');
+  doc.head.appendChild(nomoduleScriptElm);
+
+})(document);
+</script>
